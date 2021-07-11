@@ -11,6 +11,7 @@ import { CreateMovieTheaterComponent } from './movie-theaters/create-movie-theat
 import { IndexMovieTheaterComponent } from './movie-theaters/index-movie-theater/index-movie-theater.component';
 import { CreateMovieComponent } from './movies/create-movie/create-movie.component';
 import { EditMoviesComponent } from './movies/edit-movies/edit-movies.component';
+import { MovieFilterComponent } from './movies/movie-filter/movie-filter.component';
 import { EditMoviestheatersComponent } from './moviestheaters/edit-moviestheaters/edit-moviestheaters.component';
 
 const routes: Routes = [
@@ -30,6 +31,7 @@ const routes: Routes = [
 
  {path:'movies/create', component: CreateMovieComponent},
  {path:'movies/edit/:id', component: EditMoviesComponent},
+ {path: 'movies/filter', component: MovieFilterComponent},
 
  {path: '**', redirectTo: ''}
 
