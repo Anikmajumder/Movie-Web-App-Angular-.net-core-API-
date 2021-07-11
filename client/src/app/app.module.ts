@@ -8,6 +8,9 @@ import { GenericListComponent } from './utilites/generic-list/generic-list.compo
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import{ReactiveFormsModule, FormsModule} from '@angular/forms';
 import{MarkdownModule} from 'ngx-markdown';
+import{LeafletModule} from '@asymmetrik/ngx-leaflet'
+import "leaflet/dist/images/marker-shadow.png";
+
 
 
 import { MaterialModule } from './material/material.module';
@@ -30,6 +33,8 @@ import { MovieFilterComponent } from './movies/movie-filter/movie-filter.compone
 import { FormActorComponent } from './actors/form-actor/form-actor.component';
 import { InputImgComponent } from './utilites/input-img/input-img.component';
 import { InputMarkdownComponent } from './utilites/input-markdown/input-markdown.component';
+import { MovieTheatersFormComponent } from './movie-theaters/movie-theaters-form/movie-theaters-form.component';
+import { MapComponent } from './utilites/map/map.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +60,8 @@ import { InputMarkdownComponent } from './utilites/input-markdown/input-markdown
     FormActorComponent,
     InputImgComponent,
     InputMarkdownComponent,
+    MovieTheatersFormComponent,
+    MapComponent,
 
   ],
   imports: [
@@ -64,7 +71,10 @@ import { InputMarkdownComponent } from './utilites/input-markdown/input-markdown
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    MarkdownModule.forRoot()
+    LeafletModule,
+    MarkdownModule.forRoot(),
+
+
 
   ],
   providers: [],
