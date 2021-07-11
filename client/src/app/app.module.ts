@@ -6,7 +6,9 @@ import { AppComponent } from './app.component';
 import { MoviesListComponent } from './movies/movies-list/movies-list.component';
 import { GenericListComponent } from './utilites/generic-list/generic-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import{ReactiveFormsModule} from '@angular/forms';
+import{ReactiveFormsModule, FormsModule} from '@angular/forms';
+import{MarkdownModule} from 'ngx-markdown';
+
 
 import { MaterialModule } from './material/material.module';
 import { MenuComponent } from './menu/menu.component';
@@ -27,6 +29,7 @@ import { FormGenresComponent } from './genres/form-genres/form-genres.component'
 import { MovieFilterComponent } from './movies/movie-filter/movie-filter.component';
 import { FormActorComponent } from './actors/form-actor/form-actor.component';
 import { InputImgComponent } from './utilites/input-img/input-img.component';
+import { InputMarkdownComponent } from './utilites/input-markdown/input-markdown.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +54,7 @@ import { InputImgComponent } from './utilites/input-img/input-img.component';
     MovieFilterComponent,
     FormActorComponent,
     InputImgComponent,
+    InputMarkdownComponent,
 
   ],
   imports: [
@@ -58,7 +62,10 @@ import { InputImgComponent } from './utilites/input-img/input-img.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    MarkdownModule.forRoot()
+
   ],
   providers: [],
   bootstrap: [AppComponent]
