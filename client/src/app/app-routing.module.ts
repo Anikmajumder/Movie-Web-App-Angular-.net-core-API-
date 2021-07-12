@@ -12,7 +12,7 @@ import { IndexMovieTheaterComponent } from './movie-theaters/index-movie-theater
 import { CreateMovieComponent } from './movies/create-movie/create-movie.component';
 import { EditMoviesComponent } from './movies/edit-movies/edit-movies.component';
 import { MovieFilterComponent } from './movies/movie-filter/movie-filter.component';
-import { EditMoviestheatersComponent } from './moviestheaters/edit-moviestheaters/edit-moviestheaters.component';
+import { EditMoviestheatersComponent } from './movie-theaters/edit-moviestheaters/edit-moviestheaters.component';
 
 const routes: Routes = [
  {path: '', component: HomeComponent},

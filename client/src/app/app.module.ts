@@ -27,7 +27,7 @@ import { CreateMovieComponent } from './movies/create-movie/create-movie.compone
 import { EditActorComponent } from './actors/edit-actor/edit-actor.component';
 import { EditGenresComponent } from './genres/edit-genres/edit-genres.component';
 import { EditMoviesComponent } from './movies/edit-movies/edit-movies.component';
-import { EditMoviestheatersComponent } from './moviestheaters/edit-moviestheaters/edit-moviestheaters.component';
+import { EditMoviestheatersComponent } from './movie-theaters/edit-moviestheaters/edit-moviestheaters.component';
 import { FormGenresComponent } from './genres/form-genres/form-genres.component';
 import { MovieFilterComponent } from './movies/movie-filter/movie-filter.component';
 import { FormActorComponent } from './actors/form-actor/form-actor.component';
@@ -35,6 +35,8 @@ import { InputImgComponent } from './utilites/input-img/input-img.component';
 import { InputMarkdownComponent } from './utilites/input-markdown/input-markdown.component';
 import { MovieTheatersFormComponent } from './movie-theaters/movie-theaters-form/movie-theaters-form.component';
 import { MapComponent } from './utilites/map/map.component';
+import { FormMovieComponent } from './movies/form-movie/form-movie.component';
+import { MultipleSelectorComponent } from './utilites/multiple-selector/multiple-selector.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,8 @@ import { MapComponent } from './utilites/map/map.component';
     InputMarkdownComponent,
     MovieTheatersFormComponent,
     MapComponent,
+    FormMovieComponent,
+    MultipleSelectorComponent,
 
   ],
   imports: [
