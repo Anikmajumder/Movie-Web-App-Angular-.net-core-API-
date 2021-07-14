@@ -16,7 +16,7 @@ export class EditMoviesComponent implements OnInit {
                     releaseDate: new Date(), trailer: 'ABCD',poster:'https://m.media-amazon.com/images/M/MV5BZDEyN2NhMjgtMjdhNi00MmNlLWE5YTgtZGE4MzNjMTRlMGEwXkEyXkFqcGdeQXVyNDUyOTg3Njg@._V1_UX67_CR0,0,67,98_AL_.jpg'}
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params=>{
-
+      
     });
   }
 saveChanges(movieCreationDTO: movieCreationDTO)
