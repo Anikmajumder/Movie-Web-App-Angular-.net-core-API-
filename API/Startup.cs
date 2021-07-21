@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,7 +28,18 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers(options=>{
+                options.Filters.Add(typeof(MyExceptionsFilter));
+            });
+
+            services.AddCors(options=>{
+                options.AddDefaultPolicy(builder =>{
+                    var frontendUrl = Configuration.GetValue<string>("frontend_Url");
+                    builder.WithOrigins(frontendUrl).AllowAnyMethod().AllowAnyHeader();
+                });
+            });
+
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
@@ -47,6 +59,7 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors();
 
             app.UseAuthorization();
 
