@@ -45,6 +45,8 @@ namespace API
                 });
             });
 
+            services.AddAutoMapper(typeof(Startup));
+
             
             services.AddSwaggerGen(c =>
             {

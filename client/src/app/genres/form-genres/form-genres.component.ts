@@ -22,7 +22,7 @@ export class FormGenresComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       name: ['',{
-        validators: [Validators.required, Validators.minLength(3)]//, firstLetterUppercase()
+        validators: [Validators.required, Validators.minLength(3),firstLetterUppercase()]
       }]
     });
 
