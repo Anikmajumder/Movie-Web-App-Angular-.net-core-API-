@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
 using API.Entities;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +20,7 @@ namespace API.Controllers
         public readonly ApplicationDbContext context;
         public readonly IMapper mapper;
         public readonly IPhotoService photoService;
-        private readonly string containerName = "actors"; 
+        private readonly string containerName = "../Assets/Actors"; 
         public ActorsController(ApplicationDbContext context, IMapper mapper, IPhotoService photoService)
         {
             this.context = context;
@@ -27,10 +29,12 @@ namespace API.Controllers
 
         }
 
-        [HttpGet]
-        public async Task<ActionResult<List<ActorDTO>>> Get(){
-            var actors = await context.Actors.ToListAsync();
-            
+       [HttpGet]
+        public async Task<ActionResult<List<ActorDTO>>> Get([FromQuery] PaginationDTO paginationDTO)
+        {
+            var queryable = context.Actors.AsQueryable();
+            await HttpContext.InsertParametersPaginationInHeader(queryable);
+            var actors = await queryable.OrderBy(x => x.Name).Paginate(paginationDTO).ToListAsync();
             return mapper.Map<List<ActorDTO>>(actors);
         }
 

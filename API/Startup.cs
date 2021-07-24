@@ -46,7 +46,8 @@ namespace API
             services.AddCors(options=>{
                 options.AddDefaultPolicy(builder =>{
                     var frontendUrl = Configuration.GetValue<string>("frontend_Url");
-                    builder.WithOrigins(frontendUrl).AllowAnyMethod().AllowAnyHeader();
+                    builder.WithOrigins(frontendUrl).AllowAnyMethod().AllowAnyHeader()
+                    .WithExposedHeaders(new string[] {"totalAmountOfRecords"});
                 });
             });
 

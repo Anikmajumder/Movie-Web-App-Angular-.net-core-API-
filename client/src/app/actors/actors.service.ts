@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { formateDateFormDate } from '../utilites/utils';
-import { actorCreationDTO } from './actors.model';
+import { actorCreationDTO, actorDTO } from './actors.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,13 @@ export class ActorsService {
   create(actor: actorCreationDTO){
     const formData= this.buildFormData(actor);
     return this.http.post(this.apiURL, formData);
+  }
+
+  get(page: number, recordsPerPage: number): Observable<any>{
+    let params = new HttpParams();
+    params = params.append('page', page.toString());
+    params = params.append('recordsPerPage', recordsPerPage.toString());
+    return this.http.get<actorDTO[]>(this.apiURL, {observe: 'response', params});
   }
 
   private buildFormData(actor: actorCreationDTO): FormData{
