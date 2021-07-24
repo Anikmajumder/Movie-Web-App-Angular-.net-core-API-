@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
 using API.Filters;
+using API.Helpers;
+using API.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,9 +33,12 @@ namespace API
         
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
+            services.AddScoped<IPhotoService, PhotoService>();
             services.AddDbContext<ApplicationDbContext>(options=>{
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
             });
+            services.AddHttpContextAccessor();
             services.AddControllers(options=>{
                 options.Filters.Add(typeof(MyExceptionsFilter));
             });
@@ -65,6 +70,7 @@ namespace API
             }
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseRouting();
             app.UseCors();
