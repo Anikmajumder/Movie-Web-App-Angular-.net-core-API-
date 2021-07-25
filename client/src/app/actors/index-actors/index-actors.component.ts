@@ -1,5 +1,4 @@
 import { HttpResponse } from '@angular/common/http';
-import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { actorDTO } from '../actors.model';
@@ -37,8 +36,11 @@ export class IndexActorsComponent implements OnInit {
     this.loadActors();
   }
 
-  delete(){
-
+  delete(id: number){
+      this.actorsService.delete(id).subscribe(()=>
+      {
+        this.loadActors();
+      });
 
   }
 

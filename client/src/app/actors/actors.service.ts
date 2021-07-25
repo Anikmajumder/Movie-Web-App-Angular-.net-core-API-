@@ -26,6 +26,19 @@ export class ActorsService {
     return this.http.get<actorDTO[]>(this.apiURL, {observe: 'response', params});
   }
 
+  getById(id: number): Observable<actorDTO> {
+    return this.http.get<actorDTO>(`${this.apiURL}/${id}`);
+  }
+
+  edit(id: number, actor: actorCreationDTO){
+    const formData = this.buildFormData(actor);
+    return this.http.put(`${this.apiURL}/${id}`, formData);
+  }
+
+  delete(id: number){
+    return this.http.delete(`${this.apiURL}/${id}`);
+  }
+
   private buildFormData(actor: actorCreationDTO): FormData{
     const formData = new FormData();
 
