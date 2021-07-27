@@ -1,14 +1,16 @@
 export interface movieTheatersCreationDTO
 {
   name: string;
-  longtitude:number;
   latitude:number;
+  longitude:number;
+
 }
 
 export interface movieTheatersDTO
 {
   name: string;
-  longtitude:number;
   latitude:number;
+  longitude:number;
+
 }
 

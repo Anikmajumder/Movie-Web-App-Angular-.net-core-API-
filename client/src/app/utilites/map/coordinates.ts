@@ -1,4 +1,4 @@
 export interface coordinateMap{
   latitude: number;
-  longtitude: number;
+  longitude: number;
 }

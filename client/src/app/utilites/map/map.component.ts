@@ -18,7 +18,7 @@ export class MapComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.layers= this.initialCoordinates.map(value=> marker([value.latitude,value.longtitude]));
+    this.layers= this.initialCoordinates.map(value=> marker([value.latitude,value.longitude]));
   }
   @Input()
   initialCoordinates: coordinateMap[] = [];
@@ -38,11 +38,11 @@ export class MapComponent implements OnInit {
 
   handleMapClick(event: LeafletMouseEvent){
     const   latitude = event.latlng.lat;
-    const longtitude= event.latlng.lng;
-    console.log({latitude,longtitude});
+    const longitude= event.latlng.lng;
+    console.log({latitude,longitude});
     this.layers=[];
-    this.layers.push(marker([  latitude,longtitude]));
-    this.onSelectedLocation.emit({  latitude,longtitude});
+    this.layers.push(marker([  latitude,longitude]));
+    this.onSelectedLocation.emit({  latitude,longitude});
   }
 
 }

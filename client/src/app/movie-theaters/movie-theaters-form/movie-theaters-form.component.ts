@@ -30,14 +30,14 @@ export class MovieTheatersFormComponent implements OnInit {
       latitude:['',{
         validator: [Validators.required]
       }],
-      longtitude:['',{
+      longitude:['',{
         validator: [Validators.required]
       }]
     });
 
     if(this.model !== undefined){
       this.form.patchValue(this.model);
-      this.initialCoordinates.push({latitude: this.model.latitude, longtitude: this.model.longtitude});
+      this.initialCoordinates.push({latitude: this.model.latitude, longitude: this.model.longitude});
     }
 
   }

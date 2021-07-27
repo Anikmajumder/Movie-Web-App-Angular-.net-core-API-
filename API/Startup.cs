@@ -6,6 +6,7 @@ using API.Data;
 using API.Filters;
 using API.Helpers;
 using API.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -16,6 +17,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using NetTopologySuite;
+using NetTopologySuite.Geometries;
 
 namespace API
 {
@@ -33,26 +36,43 @@ namespace API
         
         public void ConfigureServices(IServiceCollection services)
         {
+            
+            // services.AddDbContext<ApplicationDbContext>(options=>{
+            //     options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"),
+            //     sqliteOptions => sqliteOptions.UseNetTopologySuite());
+            // });
+           
+            services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), 
+            sqlOptions => sqlOptions.UseNetTopologySuite()));
+            
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddScoped<IPhotoService, PhotoService>();
-            services.AddDbContext<ApplicationDbContext>(options=>{
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
-            });
             services.AddHttpContextAccessor();
+            
             services.AddControllers(options=>{
                 options.Filters.Add(typeof(MyExceptionsFilter));
             });
 
             services.AddCors(options=>{
                 options.AddDefaultPolicy(builder =>{
-                    var frontendUrl = Configuration.GetValue<string>("frontend_Url");
-                    builder.WithOrigins(frontendUrl).AllowAnyMethod().AllowAnyHeader()
-                    .WithExposedHeaders(new string[] {"totalAmountOfRecords"});
+                var frontendURL = Configuration.GetValue<string>("frontend_url");
+
+                    builder.WithOrigins(frontendURL).AllowAnyMethod().AllowAnyHeader()
+                    .WithExposedHeaders(new string[] { "totalAmountOfRecords" });
                 });
             });
 
             services.AddAutoMapper(typeof(Startup));
+            
+            services.AddSingleton(provider => new MapperConfiguration(config =>
+            {
+                var geometryFactory = provider.GetRequiredService<GeometryFactory>();
+                config.AddProfile(new AutomapperProfiles(geometryFactory));
+            }).CreateMapper());
 
+            services.AddSingleton<GeometryFactory>(NtsGeometryServices
+                .Instance.CreateGeometryFactory(srid: 4326));
             
             services.AddSwaggerGen(c =>
             {
