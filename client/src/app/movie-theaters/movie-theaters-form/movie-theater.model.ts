@@ -1,3 +1,5 @@
+import * as internal from "stream";
+
 export interface movieTheatersCreationDTO
 {
   name: string;
@@ -8,6 +10,7 @@ export interface movieTheatersCreationDTO
 
 export interface movieTheatersDTO
 {
+  id: number;
   name: string;
   latitude:number;
   longitude:number;
