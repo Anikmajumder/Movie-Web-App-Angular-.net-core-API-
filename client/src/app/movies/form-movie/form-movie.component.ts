@@ -19,19 +19,14 @@ export class FormMovieComponent implements OnInit {
   @Output()
   onSaveChanges = new EventEmitter<movieCreationDTO>();
 
-  nonSelectedGenres: multipleSelectorModel[]=[
-    {key: 1, value: 'Drama'},
-    {key: 2, value:'Action'},
-    {key: 3, value:'Comedy'}
-  ];
+  @Input()
+  nonSelectedGenres: multipleSelectorModel[]=[];
 
   selectedGenres: multipleSelectorModel[]=[];
 
-  nonSelectedMovieTheaters: multipleSelectorModel[]=[
-    {key: 1, value: 'Star cineplex'},
-    {key: 2, value:'Blockbuster cinemas'},
-    {key: 3, value:'Sony cinema'}
-  ];
+
+  @Input()
+  nonSelectedMovieTheaters: multipleSelectorModel[]=[];
 
   selectedMovieTheaters: multipleSelectorModel[]=[];
 
