@@ -38,6 +38,18 @@ namespace API.Controllers
             return mapper.Map<List<ActorDTO>>(actors);
         }
 
+        [HttpPost("searchByName")]
+        public async Task<ActionResult<List<ActorMovieDTO>>> SearchByName([FromBody] string name){
+            if(string.IsNullOrWhiteSpace(name)){return new List<ActorMovieDTO>();}
+            return await context.Actors
+                .Where(x=>x.Name.Contains(name))
+                .OrderBy(x=>x.Name)
+                .Select(x=>new ActorMovieDTO{ Id =x.Id, Name=x.Name, Picture=x.Picture})
+                .Take(5)
+                .ToListAsync();
+                                
+        }
+
         [HttpGet("{id:int}")]
         public async Task<ActionResult<ActorDTO>> Get(int id){
             var actor = await context.Actors.FirstOrDefaultAsync(x=>x.Id == id);
