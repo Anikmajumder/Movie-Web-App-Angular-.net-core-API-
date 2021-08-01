@@ -41,7 +41,7 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromForm] MovieCreationDTO movieCreationDTO){
             var movie = mapper.Map<Movie>(movieCreationDTO);
-            if(movie.Poster != null){
+            if(movieCreationDTO.Poster != null){
                 movie.Poster = await photoService.SaveFile(container,movieCreationDTO.Poster);
             }
 

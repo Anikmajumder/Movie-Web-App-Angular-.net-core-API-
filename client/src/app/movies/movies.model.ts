@@ -1,4 +1,5 @@
 import * as internal from "stream";
+import { actorsMovieDTO } from "../actors/actors.model";
 import { genreDTO } from "../genres/genres.model";
 import { movieTheatersDTO } from "../movie-theaters/movie-theaters-form/movie-theater.model";
 
@@ -11,6 +12,7 @@ export interface movieCreationDTO{
   poster: string;
   genresIds: number[];
   movieTheatersIds: number[];
+  actors: actorsMovieDTO[];
 }
 
 export interface movieDTO{

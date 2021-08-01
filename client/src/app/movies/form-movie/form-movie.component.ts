@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EventEmitter } from '@angular/core';
 import { movieCreationDTO, movieDTO } from '../movies.model';
 import { multipleSelectorModel } from 'src/app/utilites/multiple-selector/multiple-selector.model';
+import { actorsMovieDTO } from 'src/app/actors/actors.model';
 
 @Component({
   selector: 'app-form-movie',
@@ -22,12 +23,16 @@ export class FormMovieComponent implements OnInit {
   @Input()
   nonSelectedGenres: multipleSelectorModel[]=[];
 
+  @Input()
   selectedGenres: multipleSelectorModel[]=[];
 
+  @Input()
+  slelectedActors: actorsMovieDTO[]=[];
 
   @Input()
   nonSelectedMovieTheaters: multipleSelectorModel[]=[];
 
+  @Input()
   selectedMovieTheaters: multipleSelectorModel[]=[];
 
   ngOnInit(): void {
@@ -40,7 +45,8 @@ export class FormMovieComponent implements OnInit {
        releaseDate: '',
        poster: '',
        genresIds:'',
-       movieTheatersIds:''
+       movieTheatersIds:'',
+       actors: ''
     });
     if(this.model !== undefined){
       this.form.patchValue(this.model);
@@ -61,6 +67,11 @@ saveChanges(){
 
   const movieTheatersIds = this.selectedMovieTheaters.map(value=>value.key);
   this.form.get('movieTheatersIds').setValue(movieTheatersIds);
+
+  const actors = this.slelectedActors.map(value=>{
+    return{id: value.id, character: value.character}
+  });
+  this.form.get('actors').setValue(actors);
 
   this.onSaveChanges.emit(this.form.value);
 }

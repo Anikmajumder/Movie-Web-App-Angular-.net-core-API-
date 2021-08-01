@@ -22,6 +22,8 @@ export class ActorsAutocompleteComponent implements OnInit {
 
   actorsToDisplay: actorsMovieDTO[]=[];
 
+  
+
   columnsToDisplay = ['picture','name','character','actions']
 
   @ViewChild(MatTable) table: MatTable<any>;
